@@ -140,7 +140,21 @@
 
       if (multiplier) {
         const payout = (bet * multiplier).toFixed(8);
-        result.innerText = `Casino: ${casino.charAt(0).toUpperCase() + casino.slice(1)}\nMultiplier: ${multiplier}x\nTotal Return: ${payout}`;
+        
+        // Calculate house edge
+        const totalTiles = 25;
+        const safeTiles = totalTiles - mines;
+        
+        // Calculate probability of winning all tiles clicked
+        let winProbability = 1;
+        for (let i = 0; i < tiles; i++) {
+          winProbability *= (safeTiles - i) / (totalTiles - i);
+        }
+        
+        const expectedReturn = winProbability * multiplier;
+        const houseEdge = ((1 - expectedReturn) * 100).toFixed(2);
+        
+        result.innerText = `Casino: ${casino.charAt(0).toUpperCase() + casino.slice(1)}\nMultiplier: ${multiplier}x\nTotal Return: ${payout}\nHouse Edge: ${houseEdge}%`;
       } else {
         result.innerText = "Multiplier not available for this combination.";
       }

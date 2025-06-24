@@ -10,11 +10,11 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Your bot token from BotFather
-BOT_TOKEN = "8133489563:AAEMzvmyECqqMhdtqoKhQILY5dzLsvGQulA"
+# Your bot token from BotFather (use environment variable for security)
+BOT_TOKEN = os.getenv('BOT_TOKEN', 'YOUR_BOT_TOKEN_HERE')
 
 # Your Vercel hosted URL
-WEBAPP_URL = "https://your-vercel-url.vercel.app"
+WEBAPP_URL = os.getenv('WEBAPP_URL', 'https://your-vercel-url.vercel.app')
 
 async def mines_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Handle the /mines command"""
